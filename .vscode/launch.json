@@ -19,6 +19,26 @@
       "target": "aoc-2025",
       "configuration": "release",
       "preLaunchTask": "swift: Build Release aoc-2025"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:aoc-2025}",
+      "name": "Debug Aoc2025",
+      "target": "Aoc2025",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug Aoc2025"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:aoc-2025}",
+      "name": "Release Aoc2025",
+      "target": "Aoc2025",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release Aoc2025"
     }
   ]
 }
