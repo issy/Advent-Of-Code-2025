@@ -7,10 +7,7 @@ let package = Package(
     name: "aoc-2025",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "aoc-2025",
-            targets: ["aoc-2025"]
-        ),
+        .executable(name: "aoc-2025", targets: ["aoc-2025"])
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
