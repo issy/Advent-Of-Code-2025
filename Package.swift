@@ -11,5 +11,6 @@ let package = Package(
         .executableTarget(
             name: "Aoc2025"
         ),
+        .testTarget(name: "Aoc2025Test"),
     ]
 )
