@@ -9,6 +9,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .executable(name: "aoc-2025", targets: ["aoc-2025"])
     ],
+    dependencies: [
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
