@@ -65,10 +65,10 @@ public struct Day01: AdventDay {
     for instruction in input {
       let distance =
         switch instruction {
-        case .left(let distance): distance
+        case .left(let distance): -distance
         case .right(let distance): distance
         }
-      let passedZeroTimes = (distance + startPosition) / 100
+      let passedZeroTimes = abs(distance + startPosition) / 100
       zeroCounter += passedZeroTimes
       startPosition = instruction.resultingPoint(from: startPosition)
       if startPosition == 0 {
