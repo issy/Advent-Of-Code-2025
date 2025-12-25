@@ -3,7 +3,7 @@ public protocol AdventDay : Sendable {
 
     static var day: Int { get }
 
-    func parse(_ input: String) -> Input
+    func parse(_ input: String) throws -> Input
     func part1(_ input: Input) -> Int
     func part2(_ input: Input) -> Int
 }
