@@ -1,20 +1,37 @@
-import AdventOfCode
-
 import protocol Lib.AdventDay
 
-public struct InstructionLine {
-  let direction: Character
-  let distance: Int
+enum Error: Swift.Error {
+  case invalidInstruction
+}
 
-  init?(from string: String) {
+public enum Instruction: Equatable {
+  case left(Int)
+  case right(Int)
+
+  public static func parse(from string: String) throws -> Instruction {
     guard let direction = string.first,
       let distance = Int(string.dropFirst())
     else {
-      return nil
+      throw Error.invalidInstruction
     }
 
-    self.direction = direction
-    self.distance = distance
+    switch direction {
+    case "L":
+      return .left(distance)
+    case "R":
+      return .right(distance)
+    default:
+      throw Error.invalidInstruction
+    }
+  }
+
+  public func resultingPoint(from start: Int) -> Int {
+    let actualPoint =
+      switch self {
+      case .left(let distance): start - distance
+      case .right(let distance): start + distance
+      }
+    return actualPoint % 100
   }
 }
 
@@ -23,20 +40,43 @@ public struct Day01: AdventDay {
 
   public init() {}
 
-  public func parse(_ input: String) -> [String] {
+  public func parse(_ input: String) -> [Instruction] {
     input
       .split(separator: "\n")
       .map(String.init)
-      .map { return InstructionLine.init(from: $0) }
-      .map { _ in "" }
+      .map { return try! Instruction.parse(from: $0) }
   }
 
-  public func part1(_ input: [String]) -> Int {
-    0
+  public func part1(_ input: [Instruction]) -> Int {
+    var startPosition = 50
+    var zeroCounter = 0
+    for instruction in input {
+      startPosition = instruction.resultingPoint(from: startPosition)
+      if startPosition == 0 {
+        zeroCounter += 1
+      }
+    }
+    return zeroCounter
   }
 
-  public func part2(_ input: [String]) -> Int {
-    0
+  public func part2(_ input: [Instruction]) -> Int {
+    var startPosition = 50
+    var zeroCounter = 0
+    for instruction in input {
+      let distance =
+        switch instruction {
+        case .left(let distance): distance
+        case .right(let distance): distance
+        }
+      let passedZeroTimes = (distance - startPosition) / 100
+      switch instruction {
+      case .left(let distance):
+        let delta = startPosition -= distance
+      case .right(let distance):
+
+      }
+      startPosition = instruction.resultingPoint(from: startPosition)
+    }
   }
 
 }
