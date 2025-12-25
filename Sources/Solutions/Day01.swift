@@ -68,15 +68,14 @@ public struct Day01: AdventDay {
         case .left(let distance): distance
         case .right(let distance): distance
         }
-      let passedZeroTimes = (distance - startPosition) / 100
-      switch instruction {
-      case .left(let distance):
-        let delta = startPosition -= distance
-      case .right(let distance):
-
-      }
+      let passedZeroTimes = (distance + startPosition) / 100
+      zeroCounter += passedZeroTimes
       startPosition = instruction.resultingPoint(from: startPosition)
+      if startPosition == 0 {
+        zeroCounter += 1
+      }
     }
+    return zeroCounter
   }
 
 }
