@@ -1,4 +1,5 @@
 import AdventOfCode
+
 import protocol Lib.AdventDay
 
 public struct InstructionLine {
@@ -7,7 +8,8 @@ public struct InstructionLine {
 
   init?(from string: String) {
     guard let direction = string.first,
-          let distance = Int(string.dropFirst()) else {
+      let distance = Int(string.dropFirst())
+    else {
       return nil
     }
 
@@ -26,7 +28,7 @@ public struct Day01: AdventDay {
       .split(separator: "\n")
       .map(String.init)
       .map { return InstructionLine.init(from: $0) }
-      .map{ _ in "" }
+      .map { _ in "" }
   }
 
   public func part1(_ input: [String]) -> Int {
