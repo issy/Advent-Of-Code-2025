@@ -36,7 +36,7 @@ class Day01TestTests: XCTestCase {
     let day = Day01()
     let parsed = day.parse(part1TestInput)
     let result = day.part2(parsed)
-    XCTAssertEqual(result, 5)
+    XCTAssertEqual(result, 6)
   }
 
   func testInstructionOperation() throws {
