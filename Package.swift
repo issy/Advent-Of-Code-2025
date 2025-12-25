@@ -7,22 +7,21 @@ let package = Package(
     name: "Aoc2025",
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.0"),
-        .package(url: "https://github.com/apple/swift-system", from: "1.6.3"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
+        .target(name: "Lib"),
         .target(
-            name: "Aoc2025",
+            name: "Solutions",
             dependencies: [
-                .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                .product(name: "SystemPackage", package: "swift-system"),
+                .byName(name: "Lib")
             ]
         ),
-        .testTarget(name: "Aoc2025Test"),
         .executableTarget(name: "CliRunner", dependencies: [
             .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            .byName(name: "Aoc2025")
+            .byName(name: "Lib"),
+            .byName(name: "Solutions")
         ]),
     ]
 )

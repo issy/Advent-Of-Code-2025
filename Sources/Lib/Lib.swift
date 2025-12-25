@@ -1,5 +1,3 @@
-import struct SystemPackage.FileDescriptor
-
 public protocol AdventDay : Sendable {
     associatedtype Input
 

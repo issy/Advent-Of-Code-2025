@@ -1,4 +1,5 @@
 import AdventOfCode
+import protocol Lib.AdventDay
 
 public struct Day01: AdventDay {
   public static let day = 1

@@ -1,4 +1,5 @@
-import Aoc2025
+import Lib
+import Solutions
 import ArgumentParser
 
 import class Foundation.FileManager
