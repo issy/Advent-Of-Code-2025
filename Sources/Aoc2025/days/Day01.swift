@@ -5,18 +5,18 @@ public struct Day01: AdventDay {
 
   public init() {}
 
-  public func parse(_ input: String) -> [Int] {
+  public func parse(_ input: String) -> [String] {
     input
       .split(separator: "\n")
-      .compactMap { Int($0) }
+      .map(String.init)
   }
 
-  public func part1(_ input: [Int]) -> Int {
+  public func part1(_ input: [String]) -> Int {
 0
   }
 
-  public func part2(_ input: [Int]) -> Int {
-0
+  public func part2(_ input: [String]) -> Int {
+    0
   }
 
 }
