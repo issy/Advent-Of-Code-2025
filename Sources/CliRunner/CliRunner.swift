@@ -1,13 +1,21 @@
+import Aoc2025
+import ArgumentParser
+
 import class Foundation.FileManager
 import struct Foundation.URL
-import ArgumentParser
-import Aoc2025
 
 enum DayRegistry {
     public static let all: [any AdventDay] = [
-        Day01.init(),
+        Day01.init()
     ]
     .sorted { type(of: $0).day < type(of: $1).day }
+}
+
+extension String {
+    func leftPad(to length: Int, with pad: Character = " ") -> String {
+        if self.count >= length { return self }
+        return String(repeating: pad, count: length - self.count) + self
+    }
 }
 
 struct InputCache {
@@ -15,14 +23,14 @@ struct InputCache {
     private var baseURL: URL
 
     init() {
-        self.baseURL = fm.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("AdventOfCode", isDirectory: true)
+        self.baseURL = .init(fileURLWithPath: fm.currentDirectoryPath)
+            .appendingPathComponent("inputs", isDirectory: true)
     }
 
     func input(for day: Int) throws -> String? {
         try fm.createDirectory(at: self.baseURL, withIntermediateDirectories: true)
 
-        let fileURL = self.baseURL.appendingPathComponent("day\(day).txt")
+        let fileURL = self.baseURL.appendingPathComponent("day\(String(day).leftPad(to: 2, with: "0")).txt")
 
         guard fm.fileExists(atPath: fileURL.path) else {
             print("Input file not found at path: \(fileURL.path)")
