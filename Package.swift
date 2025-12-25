@@ -18,6 +18,9 @@ let package = Package(
                 .byName(name: "Lib")
             ]
         ),
+        .testTarget(name: "SolutionsTest", dependencies: [
+            .byName(name: "Solutions")
+        ]),
         .executableTarget(name: "CliRunner", dependencies: [
             .product(name: "ArgumentParser", package: "swift-argument-parser"),
             .byName(name: "Lib"),
