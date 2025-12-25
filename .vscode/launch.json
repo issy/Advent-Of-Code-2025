@@ -39,6 +39,26 @@
       "target": "Aoc2025",
       "configuration": "release",
       "preLaunchTask": "swift: Build Release Aoc2025"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:aoc-2025}",
+      "name": "Debug CliRunner",
+      "target": "CliRunner",
+      "configuration": "debug",
+      "preLaunchTask": "swift: Build Debug CliRunner"
+    },
+    {
+      "type": "swift",
+      "request": "launch",
+      "args": [],
+      "cwd": "${workspaceFolder:aoc-2025}",
+      "name": "Release CliRunner",
+      "target": "CliRunner",
+      "configuration": "release",
+      "preLaunchTask": "swift: Build Release CliRunner"
     }
   ]
 }
