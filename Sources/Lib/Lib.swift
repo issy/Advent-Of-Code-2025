@@ -10,7 +10,12 @@ public protocol AdventDay: Sendable {
 
 extension AdventDay {
   public func run(with input: String) {
-    let parsed = self.parse(input)
+    let parsed = try? self.parse(input)
+
+    guard let parsed else {
+      print("Failed to parse input for day \(Self.day).")
+      return
+    }
 
     let p1 = self.part1(parsed)
     let p2 = self.part2(parsed)

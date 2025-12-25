@@ -23,8 +23,8 @@ public struct Day01: AdventDay {
 
   public init() {}
 
-  public func parse(_ input: String) throws -> [String] {
-    try input
+  public func parse(_ input: String) -> [String] {
+    input
       .split(separator: "\n")
       .map(String.init)
       .map { return InstructionLine.init(from: $0) }
