@@ -1,29 +1,16 @@
 import protocol Lib.AdventDay
 
-extension String {
-  func chunk(size: Int) -> [String] {
-    var chunks: [String] = []
-    for i in stride(from: 0, to: self.count, by: size) {
-      let start = self.index(self.startIndex, offsetBy: i)
-      let end = self.index(start, offsetBy: size, limitedBy: self.endIndex) ?? self.endIndex
-      chunks.append(String(self[start..<end]))
-    }
-    return chunks
-  }
-}
-
-func isValidId(_ id: String) -> Bool {
-  // Chop string into equal sized chunks
-  for i in 2...(id.count / 2) + 1 {
-    let chunks = id.chunk(size: i)
-    // Check for adjacent matching chunks
-    for chunkIndex in 0..<(chunks.count - 1) {
-      if chunks[chunkIndex] == chunks[chunkIndex + 1] {
-        return false
-      }
+public func stringIsRepeatedChunks(_ string: String) -> Bool {
+  let length = string.count
+  print("Checking string: \(string) of length \(length)")
+  for i in 0...(length / 2) {
+    let substring = string.prefix(i)
+    let repetitions = length / i
+    if String(repeating: String(substring), count: repetitions) == string {
+      return true
     }
   }
-  return true
+  return false
 }
 
 public struct Day02IdRange: Equatable {
@@ -46,14 +33,6 @@ public struct Day02IdRange: Equatable {
     }
     return (start...end).map(String.init)
   }
-
-  public func getAllInvalidIds() -> [String] {
-    return getAllIds().filter { Day02IdRange.idIsInvalid($0) }
-  }
-
-  public static func idIsInvalid(_ id: String) -> Bool {
-    return !isValidId(id)
-  }
 }
 
 public struct Day02: AdventDay {
@@ -67,7 +46,7 @@ public struct Day02: AdventDay {
 
   public func part1(_ input: [Day02IdRange]) -> Int {
     return input.flatMap {
-      $0.getAllIds().filter { !isValidId($0) }
+      $0.getAllIds().filter { stringIsRepeatedChunks($0) }
     }
     .map { Int.init($0)! }
     .reduce(0, +)
