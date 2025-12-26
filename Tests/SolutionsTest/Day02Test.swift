@@ -36,15 +36,25 @@ struct Day02TestTests {
     #expect(invalidIds == ["11", "22"])
   }
 
+  @Test(arguments: [
+    ("12", false),
+    ("1234", false),
+    ("1122", false),
+    ("123456", false),
+    ("111222", false),
+    ("123345", false),
+    ("1212", true),
+    ("123123", true),
+  ])
+  func testStringIsRepeatedChunks(input: String, expected: Bool) {
+    #expect(stringIsRepeatedChunks(input) == expected)
+  }
+
   @Test
-  func testIdValidation() {
-    print("Executing...")
-    #expect(stringIsRepeatedChunks("12") == false)
-    print("Executed.")
-    #expect(stringIsRepeatedChunks("1234") == false)
-    #expect(stringIsRepeatedChunks("1122") == true)
-    #expect(stringIsRepeatedChunks("123456") == false)
-    #expect(stringIsRepeatedChunks("111222") == true)
-    #expect(stringIsRepeatedChunks("123345") == false)
+  func testPart1() {
+    let day = Day02()
+    let parsed = day.parse(part2TestInput)
+    let result = day.part1(parsed)
+    #expect(result == 1_227_775_554)
   }
 }
