@@ -1,14 +1,19 @@
 import protocol Lib.AdventDay
 
-public func stringIsTwoRepeatedChunks(_ string: String) -> Bool {
+public func stringIsRepeatedChunks(_ string: String, chunks numberOfChunks: Int? = nil) -> Bool {
   let length = string.count
   for i in 1...(length / 2) {
     let substring = string.prefix(i)
-    if String(repeating: String(substring), count: 2) == string {
+    let repetitionCount = numberOfChunks ?? length / substring.count
+    if String(repeating: String(substring), count: repetitionCount) == string {
       return true
     }
   }
   return false
+}
+
+public func stringIsTwoRepeatedChunks(_ string: String) -> Bool {
+  return stringIsRepeatedChunks(string, chunks: 2)
 }
 
 public struct Day02IdRange: Equatable {
@@ -53,7 +58,13 @@ public struct Day02: AdventDay {
   }
 
   public func part2(_ input: [Day02IdRange]) -> Int {
-    0
+    return input.flatMap {
+      $0.getAllIds()
+        .filter { $0.count > 1 }
+    }
+    .filter { stringIsRepeatedChunks($0) }
+    .map { Int.init($0)! }
+    .reduce(0, +)
   }
 
 }
