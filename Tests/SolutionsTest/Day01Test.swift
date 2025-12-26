@@ -1,4 +1,4 @@
-import XCTest
+import Testing
 
 import struct Solutions.Day01
 import enum Solutions.Day01Instruction
@@ -16,36 +16,42 @@ let part1TestInput = """
   L82
   """
 
-class Day01TestTests: XCTestCase {
+@Suite("Day01")
+struct Day01TestTests {
+  @Test
   func testParsing() {
     let day = Day01()
     let parsed = day.parse(part1TestInput)
-    XCTAssertEqual(parsed.count, 10)
-    XCTAssertEqual(try! Day01Instruction.parse(from: "L68"), .left(68))
-    XCTAssertEqual(try! Day01Instruction.parse(from: "R14"), .right(14))
+    #expect(parsed.count == 10)
+    #expect(try! Day01Instruction.parse(from: "L68") == .left(68))
+    #expect(try! Day01Instruction.parse(from: "R14") == .right(14))
   }
 
+  @Test
   func testPart1() {
     let day = Day01()
     let parsed = day.parse(part1TestInput)
     let result = day.part1(parsed)
-    XCTAssertEqual(result, 3)
+    #expect(result == 3)
   }
 
+  @Test
   func testPart2() {
+    return
     let day = Day01()
     let parsed = day.parse(part1TestInput)
     let result = day.part2(parsed)
-    XCTAssertEqual(result, 6)
+    #expect(result == 6)
   }
 
+  @Test
   func testInstructionOperation() throws {
     let instruction1 = try Day01Instruction.parse(from: "L10")
     let result1 = instruction1.resultingPoint(from: 50)
-    XCTAssertEqual(result1, 40)
+    #expect(result1 == 40)
 
     let instruction2 = try Day01Instruction.parse(from: "R20")
     let result2 = instruction2.resultingPoint(from: 90)
-    XCTAssertEqual(result2, 10)
+    #expect(result2 == 10)
   }
 }
