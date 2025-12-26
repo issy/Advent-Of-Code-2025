@@ -1,18 +1,18 @@
 import protocol Lib.AdventDay
 
-enum Error: Swift.Error {
+enum Day01Error: Swift.Error {
   case invalidInstruction
 }
 
-public enum Instruction: Equatable {
+public enum Day01Instruction: Equatable {
   case left(Int)
   case right(Int)
 
-  public static func parse(from string: String) throws -> Instruction {
+  public static func parse(from string: String) throws -> Day01Instruction {
     guard let direction = string.first,
       let distance = Int(string.dropFirst())
     else {
-      throw Error.invalidInstruction
+      throw Day01Error.invalidInstruction
     }
 
     switch direction {
@@ -21,7 +21,7 @@ public enum Instruction: Equatable {
     case "R":
       return .right(distance)
     default:
-      throw Error.invalidInstruction
+      throw Day01Error.invalidInstruction
     }
   }
 
@@ -40,14 +40,14 @@ public struct Day01: AdventDay {
 
   public init() {}
 
-  public func parse(_ input: String) -> [Instruction] {
+  public func parse(_ input: String) -> [Day01Instruction] {
     input
       .split(separator: "\n")
       .map(String.init)
-      .map { return try! Instruction.parse(from: $0) }
+      .map { return try! Day01Instruction.parse(from: $0) }
   }
 
-  public func part1(_ input: [Instruction]) -> Int {
+  public func part1(_ input: [Day01Instruction]) -> Int {
     var startPosition = 50
     var zeroCounter = 0
     for instruction in input {
@@ -59,7 +59,7 @@ public struct Day01: AdventDay {
     return zeroCounter
   }
 
-  public func part2(_ input: [Instruction]) -> Int {
+  public func part2(_ input: [Day01Instruction]) -> Int {
     var startPosition = 50
     var zeroCounter = 0
     for instruction in input {

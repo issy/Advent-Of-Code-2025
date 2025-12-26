@@ -1,7 +1,7 @@
-import Solutions
 import XCTest
 
-import enum Solutions.Instruction
+import struct Solutions.Day01
+import enum Solutions.Day01Instruction
 
 let part1TestInput = """
   L68
@@ -21,8 +21,8 @@ class Day01TestTests: XCTestCase {
     let day = Day01()
     let parsed = day.parse(part1TestInput)
     XCTAssertEqual(parsed.count, 10)
-    XCTAssertEqual(try! Instruction.parse(from: "L68"), .left(68))
-    XCTAssertEqual(try! Instruction.parse(from: "R14"), .right(14))
+    XCTAssertEqual(try! Day01Instruction.parse(from: "L68"), .left(68))
+    XCTAssertEqual(try! Day01Instruction.parse(from: "R14"), .right(14))
   }
 
   func testPart1() {
@@ -40,11 +40,11 @@ class Day01TestTests: XCTestCase {
   }
 
   func testInstructionOperation() throws {
-    let instruction1 = try Instruction.parse(from: "L10")
+    let instruction1 = try Day01Instruction.parse(from: "L10")
     let result1 = instruction1.resultingPoint(from: 50)
     XCTAssertEqual(result1, 40)
 
-    let instruction2 = try Instruction.parse(from: "R20")
+    let instruction2 = try Day01Instruction.parse(from: "R20")
     let result2 = instruction2.resultingPoint(from: 90)
     XCTAssertEqual(result2, 10)
   }
