@@ -7,9 +7,14 @@ import struct Foundation.URL
 
 enum DayRegistry {
   public static let all: [any AdventDay] = [
-    Day01.init()
+    Day01.init(),
+    Day02.init(),
   ]
   .sorted { type(of: $0).day < type(of: $1).day }
+  public static let latest = all.last!
+  public static func day(_ day: Int) -> (any AdventDay)? {
+    return all.first { type(of: $0).day == day }
+  }
 }
 
 extension String {
@@ -94,7 +99,8 @@ struct AoCCommand: ParsableCommand {
 
   func resolveDays() -> [any AdventDay] {
     if let day {
-      return DayRegistry.all.filter { type(of: $0).day == day }
+      let value = DayRegistry.day(day)
+      return value != nil ? [value!] : []
     }
 
     if latest {
