@@ -28,11 +28,32 @@ struct Day02TestTests {
   }
 
   @Test
+  func testAllIdsFromTestInput() {
+    let day = Day02()
+    let parsed = day.parse(part2TestInput)
+    let allIds = parsed.flatMap { $0.getAllIds() }
+    #expect(allIds.count == 106)
+    let desiredIds = allIds.filter(stringIsTwoRepeatedChunks)
+    #expect(desiredIds.count == 8)
+    #expect(
+      desiredIds == [
+        "11",
+        "22",
+        "99",
+        "1010",
+        "1188511885",
+        "222222",
+        "446446",
+        "38593859",
+      ])
+  }
+
+  @Test
   func testIdRange() {
     let range = Day02IdRange(a: "11", b: "22")
     #expect(
       range.getAllIds() == ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"])
-    let invalidIds = range.getAllIds().filter(stringIsRepeatedChunks)
+    let invalidIds = range.getAllIds().filter(stringIsTwoRepeatedChunks)
     #expect(invalidIds == ["11", "22"])
   }
 
@@ -47,7 +68,7 @@ struct Day02TestTests {
     ("123123", true),
   ])
   func testStringIsRepeatedChunks(input: String, expected: Bool) {
-    #expect(stringIsRepeatedChunks(input) == expected)
+    #expect(stringIsTwoRepeatedChunks(input) == expected)
   }
 
   @Test

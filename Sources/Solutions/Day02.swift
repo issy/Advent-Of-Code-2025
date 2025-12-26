@@ -1,11 +1,10 @@
 import protocol Lib.AdventDay
 
-public func stringIsRepeatedChunks(_ string: String) -> Bool {
+public func stringIsTwoRepeatedChunks(_ string: String) -> Bool {
   let length = string.count
   for i in 1...(length / 2) {
     let substring = string.prefix(i)
-    let repetitions = length / i
-    if String(repeating: String(substring), count: repetitions) == string {
+    if String(repeating: String(substring), count: 2) == string {
       return true
     }
   }
@@ -44,10 +43,13 @@ public struct Day02: AdventDay {
   }
 
   public func part1(_ input: [Day02IdRange]) -> Int {
-    return input.flatMap { $0.getAllIds() }
-      .filter { stringIsRepeatedChunks($0) }
-      .map { Int.init($0)! }
-      .reduce(0, +)
+    return input.flatMap {
+      $0.getAllIds()
+        .filter { $0.count % 2 == 0 }
+    }
+    .filter { stringIsTwoRepeatedChunks($0) }
+    .map { Int.init($0)! }
+    .reduce(0, +)
   }
 
   public func part2(_ input: [Day02IdRange]) -> Int {
