@@ -14,6 +14,24 @@ public func getAllNumbersFromCharacterArray(_ chars: [Character]) -> [Int] {
   return numbers
 }
 
+struct Day03DigitToggle {
+  let value: Int
+  let index: Int
+}
+
+public func findHighestNumberFromCharacterArray(_ numbers: [Int]) -> Int {
+  let allToggles = Array(
+    numbers.enumerated().map { index, number in
+      (value: number, index: index)
+    })
+  let highest12 = allToggles.sorted(by: { $0.value > $1.value }).prefix(12)
+  print("HIGHEST 12: \(highest12)")
+  let sortedByIndex = highest12.sorted(by: { $0.index < $1.index })
+  let joined = sortedByIndex.map { String($0.value) }.joined()
+  print("JOINED: \(joined) - \(Int(joined))")
+  return Int(joined)!
+}
+
 public struct Day03: AdventDay {
   public static let day = 3
 
@@ -22,15 +40,24 @@ public struct Day03: AdventDay {
   public func parse(_ input: String) -> [[Int]] {
     input
       .split(separator: "\n")
-      .map { getAllNumbersFromCharacterArray(Array($0)) }
+      .map { line in
+        let chars = Array(line)
+        let charsAsInts = chars.map { char in
+          Int(String(char))!
+        }
+        return charsAsInts
+      }
   }
 
   public func part1(_ input: [[Int]]) -> Int {
-    input.map { $0.max()! }.reduce(0, +)
+    input
+      .map { line in getAllNumbersFromCharacterArray(line.map { Character(String($0)) }) }
+      .map { $0.max()! }
+      .reduce(0, +)
   }
 
   public func part2(_ input: [[Int]]) -> Int {
-    0
+    input.map { findHighestNumberFromCharacterArray($0) }.reduce(0, +)
   }
 
 }
