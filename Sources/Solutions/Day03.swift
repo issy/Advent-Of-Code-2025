@@ -25,10 +25,8 @@ public func findHighestNumberFromCharacterArray(_ numbers: [Int]) -> Int {
       (value: number, index: index)
     })
   let highest12 = allToggles.sorted(by: { $0.value > $1.value }).prefix(12)
-  print("HIGHEST 12: \(highest12)")
   let sortedByIndex = highest12.sorted(by: { $0.index < $1.index })
   let joined = sortedByIndex.map { String($0.value) }.joined()
-  print("JOINED: \(joined) - \(Int(joined))")
   return Int(joined)!
 }
 

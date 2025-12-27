@@ -1,7 +1,8 @@
 import Solutions
 import Testing
 
-let day3TestInput = """
+let day3TestInput =
+  """
   987654321111111
   811111111111119
   234234234234278
