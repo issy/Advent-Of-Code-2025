@@ -9,6 +9,7 @@ enum DayRegistry {
   public static let all: [any AdventDay] = [
     Day01.init(),
     Day02.init(),
+    Day03.init(),
   ]
   .sorted { type(of: $0).day < type(of: $1).day }
   public static let latest = all.last!
